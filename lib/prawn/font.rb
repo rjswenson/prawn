@@ -6,6 +6,7 @@
 #
 # This is free software. Please see the LICENSE and COPYING files for details.
 #
+require_relative "font/otf"
 require_relative "font/afm"
 require_relative "font/ttf"
 require_relative "font/dfont"
@@ -289,6 +290,7 @@ module Prawn
     # will be passed through to Font::AFM.new()
     def self.load(document, src, options={})
       case font_format(src, options)
+      when 'otf'   then OTF.new(document, src, options)
       when 'ttf'   then TTF.new(document, src, options)
       when 'dfont' then DFont.new(document, src, options)
       else AFM.new(document, src, options)
